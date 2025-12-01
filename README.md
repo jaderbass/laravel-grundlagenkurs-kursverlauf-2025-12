@@ -52,8 +52,8 @@ Ziel: Du sollst möglichst schnell mit Laravel arbeiten können, ohne lange Inst
    DB_HOST=127.0.0.1
    DB_PORT=3306
    DB_DATABASE=laravelkurs
-   DB_USERNAME=laravel_kurs
-   DB_PASSWORD=LaraKurs!2025
+   DB_USERNAME=laravel_user
+   DB_PASSWORD=LaravalKurs!2025
    ```
 
 6. Migrationen ausführen:
@@ -71,7 +71,7 @@ Ziel: Du sollst möglichst schnell mit Laravel arbeiten können, ohne lange Inst
    Danach kannst du im Browser deines Hostsystems die Seite öffnen, zum Beispiel:
 
    ```text
-   http://trainer.local:8000
+   http://<DEINE_IP>:8000
    ```
 
 ---
