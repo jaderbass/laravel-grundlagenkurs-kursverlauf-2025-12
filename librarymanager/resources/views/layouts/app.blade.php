@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'LibraryManager')</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
     <div class="page">
         <header class="page-header">
             <h1 class="page-title">Library-Manager</h1>
             <p class="page-subtitle">Übungen zum Laravel-Grundlagenkurs</p>
-            <nav class="page-nav"><a href="{{ route('start') }}">Start</a><a href="{{ route('about') }}">Über uns</a></nav>
+            <nav class="page-nav">
+                {{-- <a href="{{ route('start') }}">Start</a> --}}
+                <a href="{{ route('books.index') }}">Bücherliste</a>
+                {{-- <a href="{{ route('about') }}">Über uns</a> --}}
+            </nav>
         </header>
 
         <main>
