@@ -5,7 +5,7 @@
 @section('content')
     <h2>Bücherliste</h2>
 
-    <p><a href="{{ route('books.create') }}"></a></p>
+    <p><a href="{{ route('books.create') }}">Neues Buch anlegen</a></p>
 
     @if($books->isEmpty())
         <p>Es sind noch keine Bücher vorhanden.</p>
@@ -15,9 +15,8 @@
                 <tr>
                     <th>Titel</th>
                     <th>Autor</th>
-                    <th>ISBN</th>
-                    <th>Erscheinungsjahr</th>
                     <th>Kategorie</th>
+                    <th>Aktion</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,9 +24,18 @@
                     <tr>
                         <td>{{ $b->title }}</td>
                         <td>{{ $b->author }}</td>
-                        <td>{{ $b->isbn }}</td>
-                        <td>{{ $b->published_year }}</td>
                         <td>{{ $b->category }}</td>
+                        <td>
+                            <p>
+                                <a href="/books/{{ $b->id }}" class="btn btn-primary">Anzeigen</a>
+                                <a href="/books/{{ $b->id }}/edit" class="btn btn-primary">Bearbeiten</a>
+                            </p>
+                            <form action="/books/{{ $b->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Löschen</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

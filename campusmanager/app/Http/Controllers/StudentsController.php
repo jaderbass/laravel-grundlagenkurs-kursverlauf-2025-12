@@ -30,7 +30,9 @@ class StudentsController extends Controller
     }
     
     public function show(Student $student){
-        return view('students.show');
+        return view('students.show', [
+            'student' => $student,
+        ]);
     }
     
     public function edit(Student $student){
