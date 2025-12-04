@@ -3,8 +3,9 @@
 @section('title', 'Startseite')
 
 @section('content')
-    <h2>Infos über {{ $student->firstname }} {{ $student->lastname }}</h2>
-    
+    <h2>Infos über {{ $student->firstname }} {{ $student->lastname }}</h2>    
+
+    <x-flash />
     
       <p>
         Matrikelnummer: <strong>{{ $student->matriculation_number }}</strong><br>

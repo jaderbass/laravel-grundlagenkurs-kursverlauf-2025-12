@@ -6,9 +6,7 @@
 
     <h2>Studentenliste</h2>
 
-    @if(session('success'))
-        <p class="callout success">{{ session('success') }}</p>
-    @endif
+    <x-flash />
 
     <p><a href="{{ route('students.create') }}">Neuen Studenten anlegen</a></p>
 
@@ -19,8 +17,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Vorname</th>
-                    <th>Nachname</th>
+                    <th>Vor- und Nachname</th>
+                    <th>Hauptkurs</th>
                     <th>Email</th>
                     <th>Aktion</th>
                 </tr>
@@ -29,8 +27,10 @@
                 @foreach ($students as $s)
                     <tr>
                         <td>{{ $s->id }}</td>
-                        <td>{{ $s->firstname }}</td>
-                        <td>{{ $s->lastname }}</td>
+                        <td>{{ $s->firstname }} {{ $s->lastname }}</td>
+                        <td>
+                            <span class="badge">{{ $s->mainCourse?->shortname }}</span>
+                        </td>
                         <td>{{ $s->email }}</td>
                         <td>
                             <p>

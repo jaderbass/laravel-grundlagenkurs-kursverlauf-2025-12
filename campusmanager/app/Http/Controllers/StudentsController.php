@@ -4,25 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentCreateRequest;
 use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
 {
     public function index() {
         // generiert eine DB-Abfrage z.B. SELECT * FROM students ORDER BY lastname
-        $students = Student::orderBy('lastname')->get();
+        // with('course') sorgt für "Eager Loading" bei verknüpften Abfragen
+        // und umgeht so das N+1-Problem
+        $students = Student::with(['mainCourse', 'courses'])->orderBy('lastname')->get();
 
-        return view('students.index', [
-            'students' => $students,
-        ]);
+        return view('students.index', compact('students'));
     }
 
     public function create(){
-        return view('students.create');
+        $courses = Course::orderBy('name')->get();
+
+        return view('students.create', [
+            'courses' => $courses,
+        ]);
     }
 
     public function store( StudentCreateRequest $request ){
+
         $student = Student::create($request->validated());
+
+        $student->courses()->sync($request->input('course_ids', []));
 
         return redirect()
             ->route('students.index')
@@ -30,14 +38,20 @@ class StudentsController extends Controller
     }
     
     public function show(Student $student){
+        $courses = Course::orderBy('name')->get();
+
         return view('students.show', [
             'student' => $student,
+            'courses' => $courses,
         ]);
     }
     
     public function edit(Student $student){
+        $courses = Course::orderBy('name')->get();
+
         return view('students.edit', [
             'student' => $student,
+            'courses' => $courses,
         ]);
     }
     
@@ -51,10 +65,13 @@ class StudentsController extends Controller
                 'required',
                 'string',
                 'max:20',
-            ]
+            ],
+            'main_course_id' => ['nullable', 'integer', 'exists:courses,id'],
         ]);
 
         $student->update($data);
+
+        $student->courses()->sync($request->input('course_ids', []));
 
         return redirect()
             ->route('students.index')
