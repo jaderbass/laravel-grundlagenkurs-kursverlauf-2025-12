@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\CoursesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,4 @@ Route::put('/students/{student}', [StudentsController::class, 'update'])
 Route::delete('/students/{student}', [StudentsController::class, 'destroy'])
     ->name('students.destroy');
 
-Route::get('/courses', function() {
-    return 'Kursliste folgt';
-})->name('courses.index');
+Route::resource('courses', CoursesController::class);

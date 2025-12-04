@@ -15,6 +15,7 @@
             <nav class="page-nav">
                 <a href="{{ route('home') }}">Start</a>
                 <a href="{{ route('students.index') }}">Studenten</a>
+                <a href="{{ route('courses.index') }}">Kurse</a>
                 <a href="{{ route('about') }}">Über uns</a>
             </nav>
             <hr>
