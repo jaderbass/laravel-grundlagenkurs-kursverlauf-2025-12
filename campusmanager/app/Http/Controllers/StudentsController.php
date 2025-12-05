@@ -38,6 +38,7 @@ class StudentsController extends Controller
     }
     
     public function show(Student $student){
+
         $courses = Course::orderBy('name')->get();
 
         return view('students.show', [

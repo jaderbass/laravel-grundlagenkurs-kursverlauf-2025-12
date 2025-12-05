@@ -33,8 +33,8 @@
     </div>
     <p>
         {{ $student->firstname }} {{ $student->lastname }}:<br>
-        <a class="btn btn-primary" href="/students/{{ $student->id }}/edit">ändern</a>
-    <form action="/students/{{ $student->id }}" method="post">
+        <a class="btn btn-primary" href="{{ route('students.edit', $student) }}">ändern</a>
+    <form action="{{ route('students.destroy', $student) }}" method="post">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Löschen</button>
