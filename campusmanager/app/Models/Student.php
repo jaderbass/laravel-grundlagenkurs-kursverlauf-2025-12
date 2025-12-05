@@ -31,7 +31,7 @@ class Student extends Model
     // protected $table = 'anderer_tabellenname';
 
     public function mainCourse() {
-        // Ein Student hat gehört zu einem Kurs
+        // Ein Student gehört zu einem Kurs
         return $this->belongsTo(Course::class, 'main_course_id');
     }
 

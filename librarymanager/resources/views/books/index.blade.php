@@ -5,9 +5,11 @@
 @section('content')
     <h2>Bücherliste</h2>
 
+    @include('partials.errors')
+
     <p><a href="{{ route('books.create') }}">Neues Buch anlegen</a></p>
 
-    @if($books->isEmpty())
+    @if ($books->isEmpty())
         <p>Es sind noch keine Bücher vorhanden.</p>
     @else
         <table>
@@ -23,7 +25,13 @@
                 @foreach ($books as $b)
                     <tr>
                         <td>{{ $b->title }}</td>
-                        <td>{{ $b->author }}</td>
+                        <td>
+                            @if ($b->author)
+                                {{ $b->author->firstname }} {{ $b->author->lastname }}
+                            @else
+                                Autor unbekannt
+                            @endif
+                        </td>
                         <td>{{ $b->category }}</td>
                         <td>
                             <p>

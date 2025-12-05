@@ -3,7 +3,7 @@
 @section('title', 'Buch anlegen')
 
 @section('content')
-    <h2>Neues Buch anlegen</h2>
+    <h1 class="page-title">Neues Buch anlegen</h1>
 
     @if ($errors->any())
         <div class="callout warning">
@@ -28,8 +28,19 @@
             </div>
 
             <div class="form-group">
-                <label for="author">Autor:</label>
-                <input type="text" name="author" id="author" value="{{ old('author') }}">
+                <label for="author_id">Autor:</label>
+                <select name="author_id" id="author_id">
+
+                    <option value="">Bitte wählen</option>
+
+                    @foreach ($authors as $author)
+                        <option value="{{ $author->id }}"
+                            {{ old('author_id') }}>
+                            {{ $author->firstname }} {{ $author->lastname }}
+                        </option>
+                    @endforeach
+
+                </select>
                 @error('author')
                     <span class="callout warning">{!! __($message) !!}</span>
                 @enderror

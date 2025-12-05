@@ -23,7 +23,7 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title'=>'required|min:3',
-            'author'=>'required',
+            'author_id'=>['required', 'exists:authors,id'],
             'isbn'=>'required|size:13',
             'published_year'=>'nullable|integer',
             'category'=>'nullable|string'
